@@ -1,0 +1,18 @@
+<main class="main mat-typography">
+  <mat-card class="auth-card">
+    <mat-card-title>Task App</mat-card-title>
+    <br/>
+    <mat-card-content>
+      <nav mat-tab-nav-bar *ngIf="showTabs">
+        <a mat-tab-link routerLink="/login" routerLinkActive #loginTab="routerLinkActive" [active]="loginTab.isActive">
+          Login
+        </a>
+        <a mat-tab-link routerLink="/register" routerLinkActive #registerTab="routerLinkActive" [active]="registerTab.isActive">
+          Register
+        </a>
+      </nav>
+      <router-outlet></router-outlet>
+      <button (click)="logout()" *ngIf="!showTabs">Logout</button>
+    </mat-card-content>
+  </mat-card>
+</main>

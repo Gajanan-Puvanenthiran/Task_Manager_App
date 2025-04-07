@@ -1,0 +1,13 @@
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+}
+mat-form-field label {
+  position: absolute; /* This could cause overlapping */
+  top: 0;
+  left: 0;
+}
+
+.full-width {
+    width: 100%;
+}

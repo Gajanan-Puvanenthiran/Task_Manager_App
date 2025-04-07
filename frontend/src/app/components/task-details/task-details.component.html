@@ -1,0 +1,7 @@
+<mat-card *ngIf="task">
+  <mat-card-title>{{ task?.title }}</mat-card-title>
+  <mat-card-content>
+    <p>Description: {{ task?.description || 'N/A' }}</p>
+    <p>Status: {{ task?.status }}</p>
+  </mat-card-content>
+</mat-card>
