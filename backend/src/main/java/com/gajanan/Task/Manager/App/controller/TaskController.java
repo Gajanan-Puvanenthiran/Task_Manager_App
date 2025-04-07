@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 @Validated
-@CrossOrigin
+@CrossOrigin("http://localhost:4200")
 public class TaskController {
 
     private final TaskService taskService;

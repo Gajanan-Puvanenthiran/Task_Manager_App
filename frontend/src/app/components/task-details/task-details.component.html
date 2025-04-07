@@ -1,7 +1,10 @@
-<mat-card *ngIf="task">
-  <mat-card-title>{{ task?.title }}</mat-card-title>
+<mat-card>
+  <mat-card-title>{{ data.task.title }}</mat-card-title>
   <mat-card-content>
-    <p>Description: {{ task?.description || 'N/A' }}</p>
-    <p>Status: {{ task?.status }}</p>
+    <p><strong>Description:</strong> {{ data.task.description || 'N/A' }}</p>
+    <p><strong>Status:</strong> {{ data.task.status }}</p>
   </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="onClose()">Close</button>
+  </mat-card-actions>
 </mat-card>

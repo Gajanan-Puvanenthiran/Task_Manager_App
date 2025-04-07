@@ -1,0 +1,26 @@
+mat-card {
+  width: 400px; 
+  margin: 20px auto; 
+}
+
+mat-card-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+mat-card-content p {
+  margin-bottom: 8px;
+}
+
+mat-card-content strong {
+  font-weight: bold;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end; 
+}
+
+mat-card-content {
+    padding-bottom: 15px;
+}

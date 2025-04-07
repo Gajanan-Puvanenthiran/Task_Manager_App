@@ -1,4 +1,3 @@
-
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -17,7 +16,7 @@ export class AuthService {
   register(credentials: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, credentials, { responseType: 'text' }).pipe(
       map((response: string) => {
-        return { message: response };//transform the string into an object.
+        return { message: response };
       })
     );
   }

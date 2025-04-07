@@ -9,11 +9,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../model/task.model';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule],
+  imports: [ReactiveFormsModule, CommonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatSnackBarModule],
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css'],
 })
@@ -26,7 +28,9 @@ export class TaskFormComponent implements OnInit {
     private fb: FormBuilder,
     private taskService: TaskService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private titleService: Title
   ) {
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
@@ -36,13 +40,15 @@ export class TaskFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Task Form | Task Manager')
     this.route.params.subscribe((params) => {
       this.taskId = params['id'] ? +params['id'] : null;
       if (this.taskId) {
-        const task = this.taskService.getTaskById(this.taskId);
-        if (task) {
-          this.taskForm.patchValue(task);
-        }
+        this.taskService.getTaskById(this.taskId).subscribe(task => {
+          if (task) {
+            this.taskForm.patchValue(task);
+          }
+        });
       }
     });
   }
@@ -54,15 +60,32 @@ export class TaskFormComponent implements OnInit {
         ...this.taskForm.value,
       };
       if (this.taskId) {
-        this.taskService.updateTask(this.taskId, task).subscribe(() =>{
-          this.router.navigate(["/tasks"]);
+        this.taskService.updateTask(this.taskId, task).subscribe({
+          next: () => {
+            this.snackBar.open('Task updated successfully!', 'Close', { duration: 3000 });
+            this.router.navigate(['/tasks']);
+          },
+          error: (error) => {
+            console.error('Update task error:', error);
+            this.snackBar.open('Failed to update task.', 'Close', { duration: 3000, panelClass: ['error-snackbar'] });
+          }
         });
       } else {
-        this.taskService.createTask(task).subscribe(()=>{
-          this.router.navigate(["/tasks"]);
+        this.taskService.createTask(task).subscribe({
+          next: () => {
+            this.snackBar.open('Task created successfully!', 'Close', { duration: 3000 });
+            this.router.navigate(['/tasks']);
+          },
+          error: (error) => {
+            console.error('Create task error:', error);
+            this.snackBar.open('Failed to create task.', 'Close', { duration: 3000, panelClass: ['error-snackbar'] });
+          }
         });
       }
-      
     }
+  }
+
+  goBackToTaskList(): void {
+    this.router.navigate(['/tasks']);
   }
 }

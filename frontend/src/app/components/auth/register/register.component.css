@@ -3,7 +3,7 @@
   margin-bottom: 10px;
 }
 mat-form-field label {
-  position: absolute; /* This could cause overlapping */
+  position: absolute; 
   top: 0;
   left: 0;
 }

@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
         this.showTabs = this.isLoginOrRegisterRoute();
       });
 
-    this.showTabs = this.isLoginOrRegisterRoute(); // Initial check
+    this.showTabs = this.isLoginOrRegisterRoute(); 
   }
 
   logout () {

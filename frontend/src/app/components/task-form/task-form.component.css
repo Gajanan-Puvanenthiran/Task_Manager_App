@@ -1,7 +1,17 @@
 .task-form-container {
-  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  padding: 16px;
 }
 
 .full-width {
   width: 100%;
+  margin-bottom: 16px;
 }
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+

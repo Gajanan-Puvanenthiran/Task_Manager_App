@@ -20,7 +20,7 @@ public class JwtUtil {
                 .subject(user.getUsername())
 
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 600000))
+                .expiration(new Date(System.currentTimeMillis() + 600000))  // expiration time-10 minutes
                 .signWith(getSigningKey())
                 .compact();
     }

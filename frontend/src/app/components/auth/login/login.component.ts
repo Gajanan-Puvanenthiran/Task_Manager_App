@@ -10,6 +10,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+interface LoginResponse {
+  jwt: string;
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +23,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LoginComponent {
   loginForm: FormGroup;
   isLoading = false;
-  errorMessage: string | null = null;
   returnUrl: string;
 
   constructor(
@@ -34,7 +37,6 @@ export class LoginComponent {
       password: ['', Validators.required]
     });
 
-    // Get return URL from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/tasks';
   }
 
@@ -51,15 +53,17 @@ export class LoginComponent {
     };
 
     this.authService.login(credentials).subscribe({
-      next: (res) => {
+      next: (res: LoginResponse) => {
         this.authService.saveToken(res.jwt);
+        this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
         this.router.navigateByUrl(this.returnUrl);
       },
       error: (error) => {
+        console.error('Login error:', error);
         this.snackBar.open(error.error || 'Login failed', 'Close', {
           duration: 3000,
           panelClass: ['error-snackbar'],
-        });        
+        });
         this.isLoading = false;
       },
       complete: () => {

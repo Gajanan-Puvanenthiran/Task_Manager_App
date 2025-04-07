@@ -1,8 +1,8 @@
 .auth-card {
-  max-width: 800px; /* Adjust the card width as needed */
-  margin: 20px auto; /* Center the card horizontally */
+  max-width: 800px; 
+  margin: 20px auto; 
 }
 
 .mat-tab-nav-bar {
-  margin-bottom: 20px; /* Add some spacing below the navigation */
+  margin-bottom: 20px; 
 }
