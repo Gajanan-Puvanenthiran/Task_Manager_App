@@ -1,6 +1,6 @@
 # Task Manager Application
 
-A full-stack task management application built with Angular (frontend) and Spring Boot (backend) with MySQL/MongoDB database.
+A full-stack task management application built with Angular (frontend) and Spring Boot (backend) with MySQL database.
 
 ### Features
 * Create, read, update, and delete tasks
